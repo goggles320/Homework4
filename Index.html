@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Coding Quiz Challenge</title>
+
+    <!--Added link to Boostrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <!--Added link to Jquery-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!--Added link to Style Sheet-->
+    <!--<link rel="stylesheet" href="style.css">-->
+
+</head>
+<body>
+
+    <!--Jumbotron for Title-->
+    <div class="jumbotron">
+        <h1 class="text-center">Coding Quiz Challenge</h1>
+        <h3 class="text-center">Try to Answer the following questions. If it is too hard to you, refer back to your notes. </h3>
+    </div>
+
+
+    <div class="quiz-container">
+        <div id="quiz"></div>
+    </div>
+    <button id="start">Start Quiz</button>
+    <button id="previous"> Previous Question</button>
+    <button id="next question"> Next Question</button>
+    <button id="submit"> Submit Quiz</button>
+    <div id="results"></div>
+
+<!------------------------------------------------------------------------------------------------------------------>
+<!---------------------------JAVASCRIPT CODE SECTION---------------------------------------------------------------->
+    
+    <script type="text/javascript">
+
+    //Function to allow document to fully load before running script code
+    $(document).ready(function() 
+    {
+        var quizQuestions = 
+        {   
+            setA: 
+            { 
+                question: "A very useful tool used during development and debugging for printing content to the debugger is:",
+                answers: 
+                {
+                    a: "Javascript",
+                    b: "Terminal/bash",
+                    c: "for loops",
+                    d: "console.log"
+                },
+                correctAnswer: "d"
+                
+            }, 
+            setB:
+            {
+                question: "The condition in an if / else statment is enclosed within ________.",
+                answers: 
+                {
+                    a: "Quotes",
+                    b: "Curly brackets",
+                    c: "Parentheses",
+                    d: "Square Brackets"
+                },
+                correctAnswer: "c"
+            },
+            setC:
+            {
+                question: "Arrays in Javascript can be used to store ___________.",
+                answers: 
+                {
+                    a: "Numbers and strings",
+                    b: "Other arrays",
+                    c: "Booleans",
+                    d: "All of the above"
+                },
+                correctAnswer: "d"
+            },
+            setD:
+            {
+                question: "Commonly used data type does not include ____________.",
+                answers: 
+                {
+                    a: "Strings",
+                    b: "Booleans",
+                    c: "Alerts",
+                    d: "Numbers"
+                },
+                correctAnswer: "c"
+            }
+            
+        };
+    
+       
+        
+
+        //Event Listener to button click
+        $("#start").on("click",function()
+        {
+            alert("test");
+        })
+    })
+    
+    
+    
+    
+    </script>    
+    
+</body>
+</html>
