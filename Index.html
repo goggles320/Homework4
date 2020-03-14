@@ -97,6 +97,7 @@
     
     //Array for indexing the buttons
     var letter = ["a","b","c","d"];
+    counter = 0;
 
     //--------------------FUNCTION INITIATIONS---------------------------------------
     //Start the quiz by pushing the start-up menu text to div container
@@ -112,13 +113,14 @@
         $("#quiz").text("Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by 10 secs!");
     } 
 
-    //Push questions to screen
-    function printQuestion()
-    {
+    //Push corresponding question set to screen
+    function printQuestion(counter)
+    {   
+        $("#quiz").text("");
         //Loop to iterate through 4 buttons and index all 4 with "a,b,c,d"
         for (var i=0;i<letter.length;i++)
         {   
-            debugger;
+            
             //Create new button to print question
             var questionButton = $("<button>");
             //add classes to button to allow style changes
@@ -133,8 +135,8 @@
 
     }
     
-    //Allows hide/display buttons
-    function buttonHide()
+    //Allows showing of up to 3 buttons whilst hiding the rest
+    function buttonShow(button1, button2, button3)
     {
         $("#previous").hide();
         $("#next").hide();
@@ -148,14 +150,37 @@
        
         //Start the quiz by printing Title/Description of quiz;
         printText();
-        //Hide all the buttons except the start quiz button
-        buttonHide();
+        //Shows the "Start" button only
+        buttonShow(start);
         
         //Event Listener for the start button, once clicked, first set of questions will append to quiz text area
         $("#start").on("click",function()
         {
-            printQuestion();
+            printQuestion(counter);
         })
+
+        //Event Listener for "Next" Button
+        $("#next").on("click",function()
+        {   
+            //Check to ensure it is not on last question
+            if (counter!=="3")
+            {
+                //Function register the count to display the respective question set
+                printQuestion(counter);
+            }
+        })
+
+        //Event Listener for "Previous" Button
+        $("#previous").on("click",function()
+        {   
+            //Check to ensure it is not on first question
+            if (counter!=="0")
+            {   
+                //Function register the count to display the respective question set
+                printQuestion(counter);
+            }
+        })
+
 
         //Event Listener to High Score Page
         $("highScore").on("click",function()
