@@ -16,91 +16,156 @@
 </head>
 <body>
 
-    <!--Jumbotron for Title-->
-    <div class="jumbotron">
-        <h1 class="text-center">Coding Quiz Challenge</h1>
-        <h3 class="text-center">Try to Answer the following questions. If it is too hard to you, refer back to your notes. </h3>
-    </div>
+    <!--Navigation Bar-->
+    <ul class="nav justify-content-end">
+        <li class="highScore">
+          <a class="nav-link active" href="#">High Score</a>
+        </li>
+        <li class="Timber justify-content-end">
+          <a class="nav-link" href="#">Timer</a>
+        </li>
+    </ul>
 
 
     <div class="quiz-container">
+        <h1 id="heading"></h1>
+        <h2 id="subtext"></h2>    
         <div id="quiz"></div>
     </div>
     <button id="start">Start Quiz</button>
     <button id="previous"> Previous Question</button>
-    <button id="next question"> Next Question</button>
+    <button id="next"> Next Question</button>
     <button id="submit"> Submit Quiz</button>
     <div id="results"></div>
+
+    
 
 <!------------------------------------------------------------------------------------------------------------------>
 <!---------------------------JAVASCRIPT CODE SECTION---------------------------------------------------------------->
     
     <script type="text/javascript">
 
+    //--------------------VARIABLES INITIATION---------------------------------------
+    //Input all the questions as objects in an array
+    var arrayQuestion = 
+    [   
+        {
+            question: "A very useful tool used during development and debugging for printing content to the debugger is:",
+            answers: 
+            {
+                a: "Javascript",
+                b: "Terminal/bash",
+                c: "for loops",
+                d: "console.log"
+            },
+            correctAnswer: "d"
+        }, 
+        {
+            question: "The condition in an if / else statment is enclosed within ________.",
+            answers: 
+            {
+                a: "Quotes",
+                b: "Curly brackets",
+                c: "Parentheses",
+                d: "Square Brackets"
+            },
+            correctAnswer: "c"
+        },
+        {
+            question: "Arrays in Javascript can be used to store ___________.",
+            answers: 
+            {
+                a: "Numbers and strings",
+                b: "Other arrays",
+                c: "Booleans",
+                d: "All of the above"
+            },
+            correctAnswer: "d"
+        },
+        {
+            question: "Commonly used data type does not include ____________.",
+            answers: 
+            {
+                a: "Strings",
+                b: "Booleans",
+                c: "Alerts",
+                d: "Numbers"
+            },
+            correctAnswer: "c"
+        }
+    ];
+    
+    //Array for indexing the buttons
+    var letter = ["a","b","c","d"];
+
+    //--------------------FUNCTION INITIATIONS---------------------------------------
+    //Start the quiz by pushing the start-up menu text to div container
+    //function startQuiz()
+    //{
+        //$("#quiz").text(sometext);
+    //}
+
+    //Push starting messages to screen
+    function printText()
+    {
+        $("#heading").text("Coding Quiz Challenge");
+        $("#quiz").text("Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by 10 secs!");
+    } 
+
+    //Push questions to screen
+    function printQuestion()
+    {
+        //Loop to iterate through 4 buttons and index all 4 with "a,b,c,d"
+        for (var i=0;i<letter.length;i++)
+        {   
+            debugger;
+            //Create new button to print question
+            var questionButton = $("<button>");
+            //add classes to button to allow style changes
+            questionButton.addClass("question-button question question-button-color");
+            //add attribute and assign an index to each of the 4 buttons generated
+            questionButton.attr("data-letter",letter[i]);
+            //saves text content to button
+            questionButton.text(arrayQuestion[i]);
+            //pushes to quiz text area
+            $("#quiz").append(questionButton);
+        }
+
+    }
+    
+    //Allows hide/display buttons
+    function buttonHide()
+    {
+        $("#previous").hide();
+        $("#next").hide();
+        $("#submit").hide();    
+    }
+
+    //------------------------------------------EXECUTION OF CODE------------------------------------------------------
     //Function to allow document to fully load before running script code
     $(document).ready(function() 
     {
-        var quizQuestions = 
-        {   
-            setA: 
-            { 
-                question: "A very useful tool used during development and debugging for printing content to the debugger is:",
-                answers: 
-                {
-                    a: "Javascript",
-                    b: "Terminal/bash",
-                    c: "for loops",
-                    d: "console.log"
-                },
-                correctAnswer: "d"
-                
-            }, 
-            setB:
-            {
-                question: "The condition in an if / else statment is enclosed within ________.",
-                answers: 
-                {
-                    a: "Quotes",
-                    b: "Curly brackets",
-                    c: "Parentheses",
-                    d: "Square Brackets"
-                },
-                correctAnswer: "c"
-            },
-            setC:
-            {
-                question: "Arrays in Javascript can be used to store ___________.",
-                answers: 
-                {
-                    a: "Numbers and strings",
-                    b: "Other arrays",
-                    c: "Booleans",
-                    d: "All of the above"
-                },
-                correctAnswer: "d"
-            },
-            setD:
-            {
-                question: "Commonly used data type does not include ____________.",
-                answers: 
-                {
-                    a: "Strings",
-                    b: "Booleans",
-                    c: "Alerts",
-                    d: "Numbers"
-                },
-                correctAnswer: "c"
-            }
-            
-        };
-    
        
+        //Start the quiz by printing Title/Description of quiz;
+        printText();
+        //Hide all the buttons except the start quiz button
+        buttonHide();
         
-
-        //Event Listener to button click
+        //Event Listener for the start button, once clicked, first set of questions will append to quiz text area
         $("#start").on("click",function()
         {
-            alert("test");
+            printQuestion();
+        })
+
+        //Event Listener to High Score Page
+        $("highScore").on("click",function()
+        {
+            //Event only registers when quiz is finished or has not started - quizFinish counter clears when quiz finishes
+            if (quizFinish == "0")
+            {
+                //Show high score function
+                showScore();
+            }
         })
     })
     
